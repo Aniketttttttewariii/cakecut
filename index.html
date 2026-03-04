@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Love ❤️</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            overflow-x: hidden;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            color: white;
+            background: radial-gradient(circle at bottom, #0f2027, #203a43, #2c5364);
+        }
+
+        /* 🌙 Night Stars */
+        .star {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            from {
+                opacity: 0.3;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* 💖 Glowing Name */
+        .glow-name {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-top: 20px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff4da6;
+            }
+
+            to {
+                text-shadow: 0 0 20px #ff99cc, 0 0 40px #ff99cc;
+            }
+        }
+
+        /* Cake */
+        .cake {
+            position: relative;
+            width: 220px;
+            height: 150px;
+            margin: 40px auto;
+            transition: 1s;
+        }
+
+        .layer {
+            position: absolute;
+            width: 100%;
+            height: 60px;
+            border-radius: 20px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .layer.top {
+            top: 0;
+            background: #ffc75f;
+        }
+
+        .layer.middle {
+            top: 40px;
+            background: #ff6f91;
+        }
+
+        .layer.bottom {
+            top: 80px;
+            background: #ff9671;
+        }
+
+        .slice {
+            position: absolute;
+            width: 70px;
+            height: 60px;
+            background: #ff6f91;
+            border-radius: 20px;
+            top: 40px;
+            left: 75px;
+            display: none;
+            transition: 1s;
+        }
+
+        /* Candles */
+        .candle {
+            width: 10px;
+            height: 35px;
+            background: white;
+            position: absolute;
+            top: -35px;
+            border-radius: 5px;
+        }
+
+        .candle:nth-child(5) {
+            left: 50px;
+        }
+
+        .candle:nth-child(6) {
+            left: 100px;
+        }
+
+        .candle:nth-child(7) {
+            left: 150px;
+        }
+
+        .flame {
+            width: 12px;
+            height: 20px;
+            background: radial-gradient(circle, #ffff00, #ff4500);
+            border-radius: 50%;
+            position: absolute;
+            top: -18px;
+            animation: flicker 0.3s infinite alternate;
+        }
+
+        @keyframes flicker {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.3);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* 🎆 REAL PARTICLE FIREWORKS */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="stars"></div>
+
+    <div class="container mt-4">
+
+        <h1 class="glow-name">🎉 Happy Birthday My Aparna 🎉</h1>
+
+        <div class="cake" id="cake" style="margin-top: 100px;">
+            <div class="layer top"></div>
+            <div class="layer middle"></div>
+            <div class="layer bottom"></div>
+
+            <div class="slice" id="slice"></div>
+
+            <div class="candle">
+                <div class="flame" id="f1"></div>
+            </div>
+            <div class="candle">
+                <div class="flame" id="f2"></div>
+            </div>
+            <div class="candle">
+                <div class="flame" id="f3"></div>
+            </div>
+        </div>
+
+        <button class="btn btn-light" onclick="blowCandles()">Blow Candles 💨</button>
+        <button class="btn btn-warning hidden" id="cutBtn" onclick="cutCake()">Cut Cake 🎂</button>
+        <button class="btn btn-success hidden" id="eatBtn" onclick="eatCake()">Eat Cake 🍰</button>
+
+        <div id="eatSection" class="hidden mt-4">
+
+            <video id="birthdayVideo" class="img-fluid" style="max-width:300px;" autoplay playsinline loop muted>
+                <source src="images/gif_1.mp4" type="video/mp4">
+                Your browser does not support video.
+            </video>
+
+            <br><br>
+
+            <button class="btn btn-danger" onclick="closeTab()" style="margin-bottom: 100px;">
+                Close This Surprise 💖
+            </button>
+
+        </div>
+
+    </div>
+
+    <script>
+
+
+        function closeTab() {
+            window.open('', '_self');
+            window.close();
+        }
+
+
+        /* 🌙 Create Stars */
+        for (let i = 0; i < 150; i++) {
+            let star = document.createElement("div");
+            star.classList.add("star");
+            star.style.top = Math.random() * 100 + "vh";
+            star.style.left = Math.random() * 100 + "vw";
+            star.style.animationDuration = (1 + Math.random() * 2) + "s";
+            document.body.appendChild(star);
+        }
+
+        /* Blow Candles */
+        function blowCandles() {
+            document.getElementById("f1").style.display = "none";
+            document.getElementById("f2").style.display = "none";
+            document.getElementById("f3").style.display = "none";
+            document.getElementById("cutBtn").classList.remove("hidden");
+        }
+
+        /* Cut Cake */
+        function cutCake() {
+            const slice = document.getElementById("slice");
+            slice.style.display = "block";
+            slice.style.transform = "translateY(-80px)";
+            document.getElementById("eatBtn").classList.remove("hidden");
+        }
+
+        /* Eat Cake */
+        function eatCake() {
+            document.getElementById("eatSection").classList.remove("hidden");
+            launchFireworks();
+        }
+
+        /* 🎆 REAL PARTICLE FIREWORK FUNCTION */
+        function launchFireworks() {
+
+            let x = window.innerWidth / 2;
+            let y = window.innerHeight / 3;
+
+            for (let i = 0; i < 120; i++) {
+
+                let particle = document.createElement("div");
+                particle.classList.add("particle");
+
+                let color = `hsl(${Math.random() * 360},100%,50%)`;
+                particle.style.background = color;
+
+                particle.style.left = x + "px";
+                particle.style.top = y + "px";
+
+                document.body.appendChild(particle);
+
+                let angle = Math.random() * 2 * Math.PI;
+                let velocity = Math.random() * 6 + 4;
+
+                let dx = Math.cos(angle) * velocity * 20;
+                let dy = Math.sin(angle) * velocity * 20;
+
+                particle.animate([
+                    { transform: 'translate(0,0)', opacity: 1 },
+                    { transform: `translate(${dx}px,${dy}px)`, opacity: 0 }
+                ], {
+                    duration: 1500,
+                    easing: 'ease-out'
+                });
+
+                setTimeout(() => particle.remove(), 1500);
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
