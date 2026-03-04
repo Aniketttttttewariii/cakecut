@@ -242,6 +242,10 @@
         /* Eat Cake */
         function eatCake() {
             document.getElementById("eatSection").classList.remove("hidden");
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: "smooth"
+            });
             launchFireworks();
         }
 
